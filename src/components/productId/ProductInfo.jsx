@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { addProductCart } from '../../store/slices/cart.slice'
 import "./styles/ProductInfo.css"
 
 const ProductInfo = ({product}) => {
   const [quantity, setQuantity] = useState(1)
+  const dispatch = useDispatch()
   const handlePlus=()=>{
     setQuantity(quantity+1)
   }
@@ -10,12 +13,22 @@ const ProductInfo = ({product}) => {
     const newValue =quantity-1
     if(newValue>=1){
       setQuantity(newValue)
-    }
-    
+    } 
   }
+  const handleAddProduct = ()=>{
+    const data ={
+      id:product.id,
+      quantity: quantity
+    }
+    dispatch(addProductCart(data))
+   } 
   return (
     <article className='productInfo'>
-        <h2 className='productInfo__title'>{product?.title}</h2>
+      <div className='productInfo__img'>
+        <img src={product?.productImgs[0]} alt="" />
+      </div>
+      <div className='productInfo__info'>
+      <h2 className='productInfo__title'>{product?.title}</h2>
         <p className='productInfo__description'>{product?.description}</p>
         <footer className='productInfo__footer'>
             <div className='productInfo__container-price'>
@@ -30,8 +43,13 @@ const ProductInfo = ({product}) => {
                   <div className='productInfo__plus' onClick={handlePlus}>+</div>
                 </div>
             </div>
-            <button className='productInfo__btn'> <i className='bx bx-cart'></i>add to card</button>
+            <button 
+            className='productInfo__btn'
+            onClick={handleAddProduct}
+            >Add to card <i className='bx bx-cart'></i></button>
         </footer>
+      </div>
+  
     </article>
   )
 }
