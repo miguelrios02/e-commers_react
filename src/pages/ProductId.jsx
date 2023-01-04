@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import ProductInfo from '../components/productId/ProductInfo'
 import SimilarProducts from '../components/productId/SimilarProducts'
 import "./styles/ProductId.css"
@@ -25,6 +25,11 @@ const ProductId = () => {
   },[id])
   return (
     <main className='productId'>
+      <section className='productId__path'>
+        <Link to="/" className='productId__home'>Home</Link>
+        <i className='productId__point bx bxs-circle'></i>
+        <h4 className='productId__nameProduct'>{product?.title}</h4>
+      </section>
       <ProductInfo product={product}/>
       <SimilarProducts product={product} categories={categories} />
     </main>

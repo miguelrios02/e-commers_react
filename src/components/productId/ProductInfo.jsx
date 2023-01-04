@@ -3,9 +3,29 @@ import { useDispatch } from 'react-redux'
 import { addProductCart } from '../../store/slices/cart.slice'
 import "./styles/ProductInfo.css"
 
+
 const ProductInfo = ({product}) => {
+  const positionImag=["first", "second", "third"]
+  const [currentImage, setCurrentImage] = useState(0)
   const [quantity, setQuantity] = useState(1)
   const dispatch = useDispatch()
+
+  const handleClickLeft =()=>{
+    const newValue = currentImage -1
+    if(newValue >=0) {setCurrentImage(newValue)}
+    else{
+      setCurrentImage(positionImag.length -1)
+    }
+  }
+
+  const handleClickRight =()=>{
+  const newValue = currentImage +1
+  if(newValue <= 2){setCurrentImage(newValue)} 
+  else{
+    setCurrentImage(0)
+  }
+  }
+
   const handlePlus=()=>{
     setQuantity(quantity+1)
   }
@@ -24,8 +44,14 @@ const ProductInfo = ({product}) => {
    } 
   return (
     <article className='productInfo'>
-      <div className='productInfo__img'>
-        <img src={product?.productImgs[0]} alt="" />
+      <div className='productInfo__slider'>
+        <div className={`productInfo__slider-container ${positionImag[currentImage]}`}>
+          <img src={product?.productImgs[0]} alt="" />
+          <img src={product?.productImgs[1]} alt="" />
+          <img src={product?.productImgs[2]} alt="" />
+        </div>
+        <i onClick={handleClickLeft} className='productInfo__slider-arrowLeft bx bxs-left-arrow'></i>
+        <i onClick={handleClickRight} className='productInfo__slider-arrowRight bx bxs-right-arrow' ></i>
       </div>
       <div className='productInfo__info'>
       <h2 className='productInfo__title'>{product?.title}</h2>
