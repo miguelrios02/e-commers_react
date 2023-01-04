@@ -1,0 +1,7 @@
+.Categories__list{
+    cursor: pointer;
+}
+
+.Categories__list:hover{
+   color: var(--color-red);
+}
