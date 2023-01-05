@@ -1,6 +1,22 @@
 .Categories__list{
     cursor: pointer;
 }
+.Categories__title{
+    padding-left: 20px;
+}
+
+ul{
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+li {
+   list-style: none; 
+   border-right: 1px solid var(--color-gray);
+   padding-right: 10px;
+}
+
 
 .Categories__list:hover{
    color: var(--color-red);

@@ -17,7 +17,8 @@ const Categories = ({ setCategory }) => {
       .catch((err) => console.log(err));
   }, []);
   return (
-    <section>
+    <section className="Categories" >
+      <h2 className="Categories__title" >Category</h2>
       <ul>
         <li className="Categories__list" onClick={() => handleClickCategory("")}>All product</li>
         {categoris.map((categori) => (
